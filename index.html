@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,16 +13,26 @@
             <span class="navbar-brand mb-0 h1">Sam's Budget App</span>
         </nav>
 
-    <div style.display="block" class="information" id="contact-info">
-        <form>
+    <div style.display = "block" class="information" id="contact-info">
+        <form name="userInfo">
             First Name:<br>
-        <input type="text" name="firstname" id="first"><br>
+        <input type="text" name="firstName" id="first"><br>
             Last Name:<br>
-        <input type="text" name="lastname">
+        <input type="text" name="lastName">
         </form>
+        <button onclick="validateForm()" id="submit_contact">Continue</button>
     </div>
-<button onclick="myFunction()" id="submit_contact">Continue</button>
-
+    <div class="budget">
+    <table class="table" id="budget-info">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+    </div>
    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
