@@ -13,7 +13,7 @@
             <span class="navbar-brand mb-0 h1">Sam's Budget App</span>
         </nav>
 
-    <div style.display = "block" class="information" id="contact-info">
+        <div style.display = "block" class="information" id="contact-info">
         <form name="userInfo">
             First Name:<br>
         <input type="text" name="firstName" id="first"><br>
@@ -21,8 +21,8 @@
         <input type="text" name="lastName">
         </form>
         <button onclick="validateForm()" id="submit_contact">Continue</button>
-    </div>
-    <div class="budget" id="wrapper">
+        </div>
+        <div class="budget" id="wrapper">
             <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
             <tr>
             <th>Item</th>
@@ -30,7 +30,6 @@
             <th>Date</th>
             </tr>
            
-            
             <tr id="row1">
             <td id="name_row1"></td>
             <td id="country_row1"></td>
@@ -39,6 +38,13 @@
             <input type="button" id="edit_button1" value="Edit" class="edit" onclick="edit_row('1')">
             <input type="button" id="save_button1" value="Save" class="save" onclick="save_row('1')">
             <input type="button" value="Delete" class="delete" onclick="delete_row('1')">
+            </td>
+            <td>
+            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
             </td>
             </tr>
             
@@ -72,11 +78,8 @@
             </tr>
            
             </table>
+            <button> <a href="graphic.html">Graphs</a></button>
             </div>
-
-
-
-   
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
