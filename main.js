@@ -1,65 +1,122 @@
-function validateForm() {
-    var x = document.forms["userInfo"]["firstName"].value;
-    var y = document.forms["userInfo"]["lastName"].value;
-    var z = document.getElementById("contact-info");
-    var a = document.getElementById("wrapper");
-    if (x == "") {
-        alert("Name must be filled out");
-        return false;
+const form = document.getElementById('registrar');
+const input = form.querySelector('input');
+
+const mainDiv = document.querySelector('.main');
+const ul = document.getElementById('invitedList');
+
+
+const div = document.createElement('div');
+const filterLabel = document.createElement('label');
+const filterCheckBox = document.createElement('input');
+
+filterLabel.textContent = "Hide the fixed expenses";
+filterCheckBox.type = 'checkbox';
+div.appendChild(filterLabel);
+div.appendChild(filterCheckBox);
+mainDiv.insertBefore(div,ul);
+
+filterCheckBox.addEventListener('change', (e) => {
+    const isChecked = e.target.checked;
+    const lis = ul.children;
+    if(isChecked){
+        for(let i = 0; i < lis.length; i += 1){
+            let li = lis[i];
+            if(li.className === 'responded'){
+                li.style.display = '';
+            } else {
+                li.style.display = 'none';
+            }
+        }
     } else {
-        z.style.display = "none";
-        a.style.display = "block";
+        for(let i = 0; i < lis.length; i += 1){
+            let li = lis[i];
+            li.style.display = '';
     }
 }
+});
 
-function edit_row(no)
-{
- document.getElementById("edit_button"+no).style.display="none";
- document.getElementById("save_button"+no).style.display="block";
-	
- var name=document.getElementById("name_row"+no);
- var country=document.getElementById("country_row"+no);
- var age=document.getElementById("age_row"+no);
-	
- var name_data=name.innerHTML;
- var country_data=country.innerHTML;
- var age_data=age.innerHTML;
-	
- name.innerHTML="<input type='text' id='name_text"+no+"' value='"+name_data+"'>";
- country.innerHTML="<input type='text' id='country_text"+no+"' value='"+country_data+"'>";
- age.innerHTML="<input type='text' id='age_text"+no+"' value='"+age_data+"'>";
+function createLI(text){
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    const amount = document.createElement('span');
+    
+
+    //set text content 
+    span.textContent = text;
+    amount.textContent = "test";
+    li.appendChild(span);
+    li.appendChild(amount);
+    const label = document.createElement('label');
+    label.textContent = 'Confirmed';
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    label.appendChild(checkbox);
+    li.appendChild(label);
+
+    const editButton = document.createElement('button');
+    editButton.textContent = 'edit';
+    li.appendChild(editButton);
+
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'remove';
+    li.appendChild(removeButton);
+    return li;
 }
 
-function save_row(no)
-{
- var name_val=document.getElementById("name_text"+no).value;
- var country_val=document.getElementById("country_text"+no).value;
- var age_val=document.getElementById("age_text"+no).value;
 
- document.getElementById("name_row"+no).innerHTML=name_val;
- document.getElementById("country_row"+no).innerHTML=country_val;
- document.getElementById("age_row"+no).innerHTML=age_val;
+form.addEventListener('submit',(e) => {
+    //stops browsers default reset 
+    e.preventDefault();
+    //store input value
+    const text = input.value;
+    //set input value to ''
+    input.value = '';
 
- document.getElementById("edit_button"+no).style.display="block";
- document.getElementById("save_button"+no).style.display="none";
-}
+    const li = createLI(text);
+    
+    ul.appendChild(li);
+   
+});
 
-function delete_row(no)
-{
- document.getElementById("row"+no+"").outerHTML="";
-}
+ul.addEventListener('change',(e) =>{
+    const checkbox = event.target;
+    const checked = checkbox.checked;
+    const listItem = checkbox.parentNode.parentNode;
+    
 
-function add_row()
-{
- var new_name=document.getElementById("new_name").value;
- var new_country=document.getElementById("new_country").value;
- var new_age=document.getElementById("new_age").value;
-	
- var table=document.getElementById("data_table");
- var table_len=(table.rows.length)-1;
- var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='name_row"+table_len+"'>"+new_name+"</td><td id='country_row"+table_len+"'>"+new_country+"</td><td id='age_row"+table_len+"'>"+new_age+"</td><td><input type='button' id='edit_button"+table_len+"' value='Edit' class='edit' onclick='edit_row("+table_len+")'> <input type='button' id='save_button"+table_len+"' value='Save' class='save' onclick='save_row("+table_len+")'> <input type='button' value='Delete' class='delete' onclick='delete_row("+table_len+")'></td></tr>";
+    if (checked) {
+        listItem.className = 'responded';
+    } else {
+        listItem.className = '';
 
- document.getElementById("new_name").value="";
- document.getElementById("new_country").value="";
- document.getElementById("new_age").value="";
-}
+    }
+});
+
+ul.addEventListener('click',(e) => {
+    if (e.target.tagName === 'BUTTON') {
+        const button = e.target;
+        const li = button.parentNode;
+        const ul = li.parentNode;
+     if(button.textContent === 'remove'){
+        ul.removeChild(li);
+     }else if(button.textContent === 'edit'){
+         const span = li.firstElementChild;
+         const input = document.createElement('input');
+         input.type = 'text';
+         input.value = span.textContent;
+         li.insertBefore(input,span);
+         li.removeChild(span);
+        button.textContent = 'save';
+     }else if(button.textContent === 'save'){
+         const input = li.firstElementChild;
+         console.log(input);
+         const span = document.createElement('span');
+        span.textContent = input.value;
+         li.insertBefore(span,input);
+         li.removeChild(input);
+         button.textContent = 'edit';
+        }
+    }
+});
+
